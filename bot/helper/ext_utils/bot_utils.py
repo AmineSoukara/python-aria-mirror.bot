@@ -55,7 +55,7 @@ def get_readable_file_size(size_in_bytes) -> str:
     try:
         return f'{round(size_in_bytes, 2)}{SIZE_UNITS[index]}'
     except IndexError:
-        return 'File too large'
+        return 'File Too Large'
 
 
 def getDownloadByGid(gid):
@@ -89,17 +89,16 @@ def get_readable_message():
     with download_dict_lock:
         msg = ""
         for download in list(download_dict.values()):
-            msg += f"File: <i>{download.name()}</i> - "
-            msg += download.status()
-            if download.status() != MirrorStatus.STATUS_ARCHIVING and download.status() != MirrorStatus.STATUS_EXTRACTING:
-                msg += f"\n{get_progress_bar_string(download)}"
-                       f"\nProgress {download.progress()}, Size: {download.size()}" 
-                       f"\nSpeed {download.speed()}, ETA: {download.eta()} "
+            msg += f"<b>📂 FileName :</b> <code>{download.name()}</code>"
+            msg += f"\n<b>👨‍💻 Status :</b> <b>{download.status()}</b>"
+            if download.status() != MirrorStatus.STATUS_ARCHIVING:
+                msg += f"\n<code>{get_progress_bar_string(download)}</code>\n<b>Progress:</b> <i>{download.progress()} <b>💾 Size :</b> {download.size()}</i>" \
+                    f"\n<b> 🌪 Speed :</b> {download.speed()} <b>⏱ ETA :</b> {download.eta()}"
             if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                 if hasattr(download, 'is_torrent'):
-                    msg += f"| P: {download.aria_download().connections} " \
-                           f"| S: {download.aria_download().num_seeders}"
-                msg += f"\nGID: <code>{download.gid()}</code>"
+                    msg += f"\n<b>Peers:</b> {download.download().connections} " \
+                           f"| <b>Seeds:</b> {download.download().num_seeders}"
+                msg += f"\n🚫 : <code>/Cancel@XMarsRobot {download.gid()}</code>"
             msg += "\n\n"
         return msg
 
