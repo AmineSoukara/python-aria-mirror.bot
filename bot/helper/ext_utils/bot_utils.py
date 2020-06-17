@@ -22,7 +22,7 @@ class MirrorStatus:
 
 
 PROGRESS_MAX_SIZE = 100 // 8
-PROGRESS_INCOMPLETE = ['░', '░', '░', '░', '░', '░', '░', '░']
+PROGRESS_INCOMPLETE = ['░', '░', '░', '░', '░', '░', '░']
 
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -89,15 +89,16 @@ def get_readable_message():
     with download_dict_lock:
         msg = ""
         for download in list(download_dict.values()):
-            msg += f"<b>📂 <>FileName :</b> <i>{download.name()}</i>"
-            msg += f"\n<b>✅ Status :</b> <code>{download.status()}</code>"
+            msg += f"📂 <b>Filename :</b> <code>{download.name()}</code>"
+            msg += f"\n✅ <b>Status :</b> <b>{download.status()}</b>"
             if download.status() != MirrorStatus.STATUS_ARCHIVING:
-                msg += f"\n<code>{get_progress_bar_string(download)}</code>\n<b>⏳ Progress :</b> <i>{download.progress()} 💾 <b>Size :</b> {download.size()}</i>" \
-                    f"\n<b>🌪 Speed:</b> {download.speed()} <b>⏱ <b>ETA :</b> {download.eta()}"
+                msg += f"\n{get_progress_bar_string(download)}"
+                         \n<b>⏳ Progress :</b> <i>{download.progress()} 💾 Size : {download.size()}</i>" \
+                    f"\n🌪 <b>Speed:</b> {download.speed()} ⏰ ETA : {download.eta()}"
             if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                 if hasattr(download, 'is_torrent'):
-                    msg += f"\n<b>● Peers:</b> {download.download().connections} " \
-                           f"| <b>● Seeds:</b> {download.download().num_seeders}"
+                    msg += f"\n<b>Peers:</b> {download.download().connections} " \
+                           f"| <b>Seeds:</b> {download.download().num_seeders}"
                 msg += f"\n🚫 GID: <code>/cancel {download.gid()}</code>"
             msg += "\n\n"
         return msg
