@@ -17,6 +17,7 @@ from bot.helper.mirror_utils.upload_utils import gdriveTools
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.message_utils import *
+from bot.helper.telegram_helper import button_build
 from bot.helper.mirror_utils.download_utils.youtube_dl_download_helper import YoutubeDLHelper
 import pathlib
 import os
@@ -24,7 +25,7 @@ import os
 
 class MirrorListener(listeners.MirrorListeners):
 
-    def __init__(self, bot, update, isTar=False, tag=None):
+    def __init__(self, bot, update, isTar=False,tag=None, extract=False):
         super().__init__(bot, update)
         self.isTar = isTar
         self.tag = tag
