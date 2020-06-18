@@ -22,22 +22,22 @@ def stats(update, context):
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
-    stats = f'● Bot Uptime : {currentTime}\n' \
-            f'● Total Disk Space : {total}\n' \
-            f'● Used : {used}\n' \
-            f'● Free : {free}'
+    stats = f'● <b>Bot Uptime :</b> {currentTime}\n' \
+            f'● <b>Total Disk Space :</b> {total}\n' \
+            f'● <b>Used :</b> {used}\n' \
+            f'● <b>Free :</b> {free}'
     sendMessage(stats, context.bot, update)
 
 
 @run_async
 def start(update, context):
-    sendMessage("This is a bot which can mirror all your links to Google drive!\n"
-                "Type /help to get a list of available commands 😁", context.bot, update)
+    sendMessage("This is A Bot Which Can Mirror All Your Links To Google Drive!\n"
+                "Type /Help To Get A List Of Available Commands Or Read The Pinned Message 😁", context.bot, update)
 
 
 @run_async
 def restart(update, context):
-    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    restart_message = sendMessage("Restarting, Please Wait! ♻️", context.bot, update)
     # Save restart message object in order to reply to it after restarting
     fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
