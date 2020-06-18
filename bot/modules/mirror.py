@@ -45,7 +45,7 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onDownloadComplete(self):
         with download_dict_lock:
-            LOGGER.info(f"📥 Download completed: {download_dict[self.uid].name()}")
+            LOGGER.info(f"Download completed: {download_dict[self.uid].name()}")
             download = download_dict[self.uid]
             name = download.name()
             size = download.size_raw()
@@ -57,8 +57,8 @@ class MirrorListener(listeners.MirrorListeners):
                     download_dict[self.uid] = TarStatus(name, m_path, size)
                 path = fs_utils.tar(m_path)
             except FileNotFoundError:
-                LOGGER.info('File to 🗂 Archive Not Found!')
-                self.onUploadError('Internal ⚠️ Error Occurred!!')
+                LOGGER.info('File to archive not found!')
+                self.onUploadError('Internal error occurred!!')
                 return
         else:
             path = f'{DOWNLOAD_DIR}{self.uid}/{download_dict[self.uid].name()}'
@@ -108,15 +108,15 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str):
         with download_dict_lock:
-            msg = f'✅ #Uploaded To TeamDrive \n 🗂 Drive Link : \n <a href="{link}">{download_dict[self.uid].name()}</a>'
+            msg = f'<a href="{link}">{download_dict[self.uid].name()}</a> ({download_dict[self.uid].size()})'
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 share_url = requests.utils.requote_uri(f'{INDEX_URL}/{download_dict[self.uid].name()}')
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
-                msg += f'\n\n 🗂 Index Link: \n <a href="{share_url}">{download_dict[self.uid].name()}</a> \n 💾 File Size : ({download_dict[self.uid].size()}) \n 🗣 CC : {uname}'
+                msg += f'\n\n Shareable link: <a href="{share_url}">here</a>'
             if self.tag is not None:
-                msg += f'\nCC: @{self.tag}'
+                msg += f'\ncc: @{self.tag}'
             try:
                 fs_utils.clean_download(download_dict[self.uid].path())
             except FileNotFoundError:
@@ -178,7 +178,7 @@ def _mirror(bot, update, isTar=False):
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('😶 <b>No Download Source Provided.</b> \n👉 Use : /Help', bot, update)
+        sendMessage('No download source provided', bot, update)
         return
 
     try:
@@ -188,7 +188,7 @@ def _mirror(bot, update, isTar=False):
     listener = MirrorListener(bot, update, isTar, tag)
     aria = aria2_download.AriaDownloadHelper(listener)
     aria.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/')
-    sendMessage('✅ {uname} <b>Your Url Added. Check /status 📊</b>', bot, update)
+    sendStatusMessage(update, bot)
     if len(Interval) == 0:
         Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
 
