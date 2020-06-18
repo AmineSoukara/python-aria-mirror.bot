@@ -1,7 +1,7 @@
 class _BotCommands:
     def __init__(self):
         self.StartCommand = 'mars'
-        self.MirrorCommand = 'upload'
+        self.MirrorCommand = 'mirror'
         self.TarMirrorCommand = 'tar'
         self.CancelMirror = 'cancel'
         self.CancelAllCommand = 'cancelall'
