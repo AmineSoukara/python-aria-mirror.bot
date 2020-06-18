@@ -31,8 +31,8 @@ def stats(update, context):
 
 @run_async
 def start(update, context):
-    sendMessage("This is A Bot Which Can Mirror All Your Links To Google Drive!\n"
-                "Type /Help To Get A List Of Available Commands Or Read The Pinned Message 😁", context.bot, update)
+    sendMessage("This is a Bot Which Can Mirror all Your Links To Google Drive!\n"
+                "Type /help To Get A List Of Available Commands 😁", context.bot, update)
 
 
 @run_async
@@ -61,7 +61,7 @@ def log(update, context):
 @run_async
 def bot_help(update, context):
     help_string = f'''
-/{BotCommands.StartCommand}: 👨‍💻 <>Owner<> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \nℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
+/{BotCommands.HelpCommand}: To Get This Message
 
 /{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
 
@@ -83,7 +83,9 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
+👨‍💻 <>Owner<> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \nℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
 '''
+
     sendMessage(help_string, context.bot, update)
 
 
@@ -93,7 +95,7 @@ def main():
     if path.exists('restart.pickle'):
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
-        restart_message.edit_text("Restarted Successfully! 🔐")
+        restart_message.edit_text("Restarted Successfully!")
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,
