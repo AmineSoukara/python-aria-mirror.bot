@@ -108,13 +108,13 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str):
         with download_dict_lock:
-            msg = f'✅ #𝗨𝗽𝗹𝗼𝗮𝗱𝗲𝗱 𝗧𝗼 𝗧𝗲𝗮𝗺𝗗𝗿𝗶𝘃𝗲 ✅\n\n🗂 <u>Ｄｒｉｖｅ</u>：\n<a href="{link}">{download_dict[self.uid].name()}</a> ({download_dict[self.uid].size()})'
+            msg = f'🔔 𝗨𝗽𝗹𝗼𝗮𝗱𝗲𝗱 𝗧𝗼 𝗧𝗲𝗮𝗺𝗗𝗿𝗶𝘃𝗲 🔔\n\n🗂 <u>Ｄｒｉｖｅ</u>：\n<a href="{link}">{download_dict[self.uid].name()}</a> ({download_dict[self.uid].size()})'
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 share_url = requests.utils.requote_uri(f'{INDEX_URL}/{download_dict[self.uid].name()}')
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
-                msg += f'\n\n🗂 <u>Ｉｎｄｅｘ</u>：\n<a href="{share_url}">{download_dict[self.uid].name()}</a> ({download_dict[self.uid].size()}) \n\n● <b>Dev :</b> <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \n● For Accessing Files Join Our : \n○<a href="https://groups.google.com/d/forum/Damien-Xmars">Ｔｅａｍ Ｄｒｉｖｅ</a>. \n● Dont Share Any Links To Public'
+                msg += f'\n\n🗂 <u>Ｉｎｄｅｘ</u>：\n<a href="{share_url}">{download_dict[self.uid].name()}</a> ({download_dict[self.uid].size()}) \n\n● <b>Dev :</b> <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \n● For Accessing TeamDrive Join : \n○ Our <a href="https://groups.google.com/d/forum/Damien-Xmars">Google Group</a>. \n● Dont Share Any Links To Public'
             if self.tag is not None:
                 msg += f'\n🗣 <b>User :</b> @{self.tag}'
             try:
