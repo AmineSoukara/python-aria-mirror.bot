@@ -22,22 +22,22 @@ def stats(update, context):
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
-    stats = f'● Bot Uptime: {currentTime}\n' \
-            f'● Total Disk Space: {total}\n' \
-            f'● Used: {used}\n' \
-            f'● Free: {free}'
+    stats = f'● Bot Uptime : {currentTime}\n' \
+            f'● Total Disk Space : {total}\n' \
+            f'● Used : {used}\n' \
+            f'● Free : {free}'
     sendMessage(stats, context.bot, update)
 
 
 @run_async
 def start(update, context):
-    sendMessage("This is A Bot Which Can Mirror All Your Links To Google Drive!\n"
-                "Type /Help To Get A List Of Available Commands.😁", context.bot, update)
+    sendMessage("This is a bot which can mirror all your links to Google drive!\n"
+                "Type /help to get a list of available commands 😁", context.bot, update)
 
 
 @run_async
 def restart(update, context):
-    restart_message = sendMessage("Restarting, Please wait! 😁", context.bot, update)
+    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
     # Save restart message object in order to reply to it after restarting
     fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
@@ -61,8 +61,7 @@ def log(update, context):
 @run_async
 def bot_help(update, context):
     help_string = f'''
-/👨‍💻 <>Owner<> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a>
-/ℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
+/{BotCommands.StartCommand}: 👨‍💻 <>Owner<> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \nℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
 
 /{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
 
@@ -94,7 +93,7 @@ def main():
     if path.exists('restart.pickle'):
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
-        restart_message.edit_text("Restarted Successfully! ✔")
+        restart_message.edit_text("Restarted Successfully! 🔐")
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,
@@ -115,7 +114,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling()
-    LOGGER.info("Bot Started ✔!")
+    LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
 
