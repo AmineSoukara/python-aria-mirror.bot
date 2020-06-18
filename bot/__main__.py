@@ -32,7 +32,7 @@ def stats(update, context):
 @run_async
 def start(update, context):
     sendMessage("This is A Bot Which Can Mirror All Your Links To Google Drive!\n"
-                "Type /Help To Get A List Of Available Commands.\n", context.bot, update)
+                "Type /Help To Get A List Of Available Commands.😁", context.bot, update)
 
 
 @run_async
@@ -95,7 +95,7 @@ def main():
     if path.exists('restart.pickle'):
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
-        restart_message.edit_text("Restarted Successfully!")
+        restart_message.edit_text("Restarted Successfully! ✔")
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,
@@ -116,7 +116,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling()
-    LOGGER.info("Bot Started!")
+    LOGGER.info("Bot Started ✔!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
 
