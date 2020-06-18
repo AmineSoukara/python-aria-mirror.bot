@@ -108,16 +108,15 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str):
         with download_dict_lock:
-            msg = f'🗂 Drive Link : \n <a href="{link}">{download_dict[self.uid].name()}</a> \n\n 💾 Size : ({download_dict[self.uid].size()})'
+            msg = f'👨‍💻 Owner @AmineSoukara \n ✅ Drive : \n <a href="{link}">{download_dict[self.uid].name()}</a> \n\n Size : ({download_dict[self.uid].size()})'
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
-            msg = f'🗣 : {uname}'
             if INDEX_URL is not None:
                 share_url = requests.utils.requote_uri(f'{INDEX_URL}/{download_dict[self.uid].name()}')
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
-                msg += f'\n\n 🗂 Index Link : \n <a href="{share_url}">{download_dict[self.uid].name()}</a>'
+                msg += f'\n\n ✅ Index : \n <a href="{share_url}">{download_dict[self.uid].name()}</a>'
             if self.tag is not None:
-                msg += f'\ncc: @{self.tag}'
+                msg += f'cc: @{self.tag}'
             try:
                 fs_utils.clean_download(download_dict[self.uid].path())
             except FileNotFoundError:
@@ -189,7 +188,7 @@ def _mirror(bot, update, isTar=False):
     listener = MirrorListener(bot, update, isTar, tag)
     aria = aria2_download.AriaDownloadHelper(listener)
     aria.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/')
-    sendMessage('✅ <b>Your Url Added. Check /status 📊</b>', bot, update)
+    sendMessage('✅ @{self.tag} <b>Your Url Added. Check /status 📊</b>', bot, update)
     if len(Interval) == 0:
         Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
 
