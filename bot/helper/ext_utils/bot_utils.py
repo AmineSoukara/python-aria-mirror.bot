@@ -13,12 +13,12 @@ URL_REGEX = r"(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+"
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading 📈"
-    STATUS_DOWNLOADING = "Downloading 📉"
-    STATUS_WAITING = "Queued ⏳"
-    STATUS_FAILED = "Failed.😶 Cleaning Download"
-    STATUS_CANCELLED = "🚫 Cancelled"
-    STATUS_ARCHIVING = "💾 Archiving"
+    STATUS_UPLOADING = "📥 <b>Trying To Upload</b>"
+    STATUS_DOWNLOADING = "📥 <b>Trying To Download</b>"
+    STATUS_WAITING = "⏳ <b>Queued</b>"
+    STATUS_FAILED = "<b>Failed.😶 Cleaning Download</b>"
+    STATUS_CANCELLED = "🚫 <b>Cancelled</b>"
+    STATUS_ARCHIVING = "💾 <b>Archiving</b>"
 
 
 PROGRESS_MAX_SIZE = 100 // 8
@@ -55,7 +55,7 @@ def get_readable_file_size(size_in_bytes) -> str:
     try:
         return f'{round(size_in_bytes, 2)}{SIZE_UNITS[index]}'
     except IndexError:
-        return 'File Too Large'
+        return 'File Too Large 🙄'
 
 
 def getDownloadByGid(gid):
@@ -89,11 +89,11 @@ def get_readable_message():
     with download_dict_lock:
         msg = ""
         for download in list(download_dict.values()):
-            msg += f"<b>📂 FileName :</b> <code>{download.name()}</code>"
-            msg += f"\n<b>👨‍💻 Status :</b> <u>{download.status()}</u>"
+            msg += f"<b>🗂 File Name :</b> <code>{download.name()}</code>"
+            msg += f"\n<b>📊 Status :</b> <u>{download.status()}</u>"
             if download.status() != MirrorStatus.STATUS_ARCHIVING:
-                msg += f"\n<code>{get_progress_bar_string(download)}</code>\n<b>💾 Size :</b> {download.size()} <b>⏳ Progress :</b> {download.progress()}" \
-                    f"\n<b>🔥 Speed :</b> {download.speed()} <b>⏱ ETA :</b> {download.eta()}"
+                msg += f"\n<code>{get_progress_bar_string(download)}</code>\n<b>💾 Size:</b> {download.size()} <b>🔥 Speed:</b> {download.speed()}" \
+                    f"\n<b>⏳ Progress:</b> {download.progress()} <b>⏱ ETA:</b> {download.eta()}"
             if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                 if hasattr(download, 'is_torrent'):
                     msg += f"\n<b>Peers:</b> {download.download().connections} " \
