@@ -62,7 +62,6 @@ def log(update, context):
 def bot_help(update, context):
     help_string = f'''
 /👨‍💻 <>Owner<> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a>
-
 /ℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
 
 /{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
