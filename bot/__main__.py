@@ -83,7 +83,8 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
-👨‍💻 <>Owner<> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \nℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
+👨‍💻 <b>Owner</b> : <a href="https://t.me/AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \nℹ <b>Group</b> : <a href="https://t.me/DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
+
 '''
 
     sendMessage(help_string, context.bot, update)
