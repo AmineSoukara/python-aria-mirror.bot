@@ -16,6 +16,6 @@ class _BotCommands:
         self.LogCommand = 'log'
         self.CloneCommand = "clone"
         self.WatchCommand = 'vid'
-        self.TarWatchCommand = 'tar_vid'
+        self.TarWatchCommand = 'tarvid'
 
 BotCommands = _BotCommands()
