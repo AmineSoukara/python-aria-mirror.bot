@@ -18,7 +18,7 @@ def cancel_mirror(update,context):
         gid = args[1]
         dl = getDownloadByGid(gid)
         if not dl:
-            sendMessage(f"GID: <code>{gid}</code> not found.",context.bot,update)
+            sendMessage(f"Code : <code>{gid}</code> Not Found. 🙂",context.bot,update)
             return
         with download_dict_lock:
             keys = list(download_dict.keys())
@@ -32,18 +32,18 @@ def cancel_mirror(update,context):
         if mirror_message is None or mirror_message.message_id not in keys:
             if BotCommands.MirrorCommand in mirror_message.text or \
                     BotCommands.TarMirrorCommand in mirror_message.text:
-                msg = "Mirror already have been cancelled"
+                msg = "Mirror Already Have Been Cancelled 😅"
                 sendMessage(msg,context.bot,update)
                 return
             else:
-                msg = "Please reply to the /mirror message which was used to start the download or /cancel gid to cancel it!"
+                msg = "Please Reply To The /drive Message Which Was Used To Start The Download Or /Delete Code To Cancel it!"
                 sendMessage(msg,context.bot,update)
                 return
     if dl.status() == "Uploading":
-        sendMessage("Upload in Progress, Don't Cancel it.", context.bot, update)
+        sendMessage("Upload in Progress, Don't Cancel it. 🙄", context.bot, update)
         return
     elif dl.status() == "Archiving":
-        sendMessage("Archival in Progress, Don't Cancel it.", context.bot, update)
+        sendMessage("Archival in Progress, Don't Cancel it. 🙄", context.bot, update)
         return
     else:
         dl.download().cancel_download()
