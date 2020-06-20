@@ -16,7 +16,7 @@ def list_drive(update,context):
     if msg:
         reply_message = sendMessage(msg, context.bot, update)
     else:
-        reply_message = sendMessage('No result found', context.bot, update)
+        reply_message = sendMessage('No Result Found 🙄', context.bot, update)
 
     threading.Thread(target=auto_delete_message, args=(context.bot, update.message, reply_message)).start()
 
