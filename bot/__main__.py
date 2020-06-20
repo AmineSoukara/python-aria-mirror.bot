@@ -22,10 +22,10 @@ def stats(update, context):
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
-    stats = f'Bot Uptime: {currentTime}\n' \
-            f'Total disk space: {total}\n' \
-            f'Used: {used}\n' \
-            f'Free: {free}'
+    stats = f'●<b> Bot Uptime :</b> {currentTime}\n' \
+            f'●<b> Total disk space :</b> {total}\n' \
+            f'●<b> Used :</b> {used}\n' \
+            f'●<b> Free :</b> {free}'
     sendMessage(stats, context.bot, update)
 
 
@@ -83,7 +83,7 @@ def bot_help(update, context):
 
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
-Watch video - "HelpBdarija"
+👨‍💻 <b>Owner</b> : <a href="@AmineSoukara">ＤＡＭＩＥＮ ＸＭＡＲＳ</a> \nℹ <b>Group</b> : <a href="@DamienHelp">Ｄａｍｉｅｎ Ｈｅｌｐ</a>
 '''
     sendMessage(help_string, context.bot, update)
 
