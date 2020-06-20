@@ -31,13 +31,13 @@ def stats(update, context):
 
 @run_async
 def start(update, context):
-    sendMessage("This is a bot which can mirror all your links to Google drive!\n"
-                "Type /help to get a list of available commands", context.bot, update)
+    sendMessage("This Is A Bot Which Can Mirror All Your Links To Google Drive!\n"
+                "Type /Help To Get A List Of Available Commands", context.bot, update)
 
 
 @run_async
 def restart(update, context):
-    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    restart_message = sendMessage("Restarting, Please wait! ♻️", context.bot, update)
     # Save restart message object in order to reply to it after restarting
     fs_utils.clean_all()
     with open('restart.pickle', 'wb') as status:
@@ -94,7 +94,7 @@ def main():
     if path.exists('restart.pickle'):
         with open('restart.pickle', 'rb') as status:
             restart_message = pickle.load(status)
-        restart_message.edit_text("Restarted Successfully!")
+        restart_message.edit_text("Restarted Successfully! 🔐")
         remove('restart.pickle')
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,
